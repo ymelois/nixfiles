@@ -32,6 +32,7 @@ in
         };
         templates = {
           git_push_bookmark = ''"${user.name}/push-" ++ change_id.short()'';
+          commit_trailers = "format_signed_off_by_trailer(self)";
         };
         git = {
           executable-path = "${config.programs.git.package}/bin/git";
