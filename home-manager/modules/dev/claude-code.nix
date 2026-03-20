@@ -20,7 +20,7 @@ in
     };
 
     programs.git.ignores = lib.mkIf config.programs.git.enable [
-      ".claude/settings.local.json"
+      "**/.claude/settings.local.json"
     ];
   };
 }
