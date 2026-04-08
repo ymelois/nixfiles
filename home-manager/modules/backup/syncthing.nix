@@ -9,6 +9,17 @@ let
   cfg = config.services.syncthing;
 in
 {
+  options.services.syncthing = {
+    folders = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "Desktop"
+        "Pictures"
+        "Videos"
+      ];
+    };
+  };
+
   config = lib.mkIf cfg.enable {
     services.syncthing = {
       overrideDevices = false;
@@ -20,11 +31,14 @@ in
             introducer = true;
           };
         };
-        folders = {
-          "${user.homeDirectory}/Desktop".devices = [ "server" ];
-          "${user.homeDirectory}/Pictures".devices = [ "server" ];
-          "${user.homeDirectory}/Videos".devices = [ "server" ];
-        };
+        folders = builtins.listToAttrs (
+          builtins.map (folder: {
+            name = "${user.homeDirectory}/${folder}";
+            value = {
+              devices = [ "server" ];
+            };
+          }) cfg.folders
+        );
       };
     };
 

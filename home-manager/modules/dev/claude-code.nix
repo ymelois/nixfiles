@@ -48,5 +48,9 @@ in
     programs.git.ignores = lib.mkIf config.programs.git.enable [
       "**/.claude/settings.local.json"
     ];
+
+    services.syncthing = lib.mkIf config.services.syncthing.enable {
+      folders = [ ".claude/projects" ];
+    };
   };
 }

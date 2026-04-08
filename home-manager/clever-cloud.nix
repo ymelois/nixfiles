@@ -15,6 +15,10 @@
       enable = true;
       device = "laptop";
     };
+    backup = {
+      enable = true;
+      folders = [ ];
+    };
   };
 
   home.stateVersion = "25.05";

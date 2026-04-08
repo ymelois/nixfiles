@@ -15,11 +15,22 @@ in
 
   options.modules.backup = {
     enable = lib.mkEnableOption "backup";
+    folders = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "Desktop"
+        "Pictures"
+        "Videos"
+      ];
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services = {
-      syncthing.enable = true;
+      syncthing = {
+        enable = true;
+        folders = cfg.folders;
+      };
     };
   };
 }
