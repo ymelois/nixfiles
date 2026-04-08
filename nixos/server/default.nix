@@ -49,6 +49,10 @@
           id = "C5FRWWE-HZQ2H7F-RO522LK-Q4JIGZL-ET6LZMT-CL737LK-A7LRPUW-OBWYQAC";
           autoAcceptFolders = true;
         };
+        "clever-cloud" = {
+          id = "UBQQYMZ-NWAYHOM-PBYLAAC-VBTJAE7-USBJNMD-VZWLWNW-64DHPXQ-HSURVAF";
+          autoAcceptFolders = false;
+        };
       };
     };
   };
