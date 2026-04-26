@@ -26,6 +26,7 @@
   };
 
   services = {
+    logind.enable = true;
     clamav.enable = true;
     onepassword-secrets.enable = true;
     printing.enable = true;
