@@ -59,6 +59,9 @@ in
         switch-to-workspace-left = [ ];
         switch-to-workspace-right = [ ];
       };
+      "org/gnome/desktop/wm/preferences" = {
+        audible-bell = false;
+      };
       "org/gnome/mutter" = {
         experimental-features = cfg.experimentalFeatures;
       };
