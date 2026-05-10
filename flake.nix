@@ -42,6 +42,11 @@
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    minecraft-server-manager = {
+      url = "github:ymelois/minecraft-server-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -62,6 +67,7 @@
       overlays = [
         nur.overlays.default
         inputs.claude-code.overlays.default
+        inputs.minecraft-server-manager.overlays.default
         (final: prev: {
           unstable = import inputs.nixpkgs-unstable {
             inherit system;
@@ -178,6 +184,11 @@
         "server" = mkNixosSystem [
           disko.nixosModules.disko
           ./nixos/server
+        ];
+        "server-game" = mkNixosSystem [
+          disko.nixosModules.disko
+          inputs.minecraft-server-manager.nixosModules.default
+          ./nixos/server-game
         ];
         "clever-cloud" = mkNixosSystem [
           ./nixos/clever-cloud
