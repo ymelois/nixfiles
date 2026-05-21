@@ -26,7 +26,7 @@ in
       settings = {
         gui.enable = true;
         devices = {
-          "server" = {
+          "youn::server" = {
             id = "TTUFKM7-A5RG55J-R3SN7YO-I2KAPCQ-FZROOD5-736WAXG-ZQXSIYZ-5PXUBAJ";
             introducer = true;
           };
@@ -35,7 +35,7 @@ in
           builtins.map (folder: {
             name = "${user.homeDirectory}/${folder}";
             value = {
-              devices = [ "server" ];
+              devices = [ "youn::server" ];
             };
           }) cfg.folders
         );
