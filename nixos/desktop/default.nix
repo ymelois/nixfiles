@@ -14,6 +14,10 @@
   boot.initrd.luks.devices."luks-efba64ac-5927-4281-b972-4df09a479d35".device =
     "/dev/disk/by-uuid/efba64ac-5927-4281-b972-4df09a479d35";
 
+  environment.systemPackages = with pkgs; [
+    signal-desktop
+  ];
+
   programs = {
     _1password.enable = true;
     steam.enable = true;

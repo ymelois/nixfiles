@@ -29,7 +29,6 @@ in
     home.packages = with pkgs; [
       # messaging
       discord
-      signal-desktop
       slack
 
       # utilities
