@@ -17,6 +17,14 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+
+      extraConfig.pipewire = {
+        "10-airplay" = {
+          "context.modules" = [
+            { name = "libpipewire-module-raop-discover"; }
+          ];
+        };
+      };
     };
   };
 }
