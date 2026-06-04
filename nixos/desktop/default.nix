@@ -48,7 +48,9 @@
     enable32Bit = true;
   };
 
-  environment.systemPackages = with pkgs; [ lact ];
-  systemd.packages = with pkgs; [ lact ];
-  systemd.services.lact.wantedBy = [ "multi-user.target" ];
+  hardware.amdgpu.overdrive.enable = true;
+
+  services.lact = {
+    enable = true;
+  };
 }
