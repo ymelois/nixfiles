@@ -10,14 +10,12 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./minecraft.nix
   ];
 
   environment.systemPackages = with pkgs; [
-    tmux
     neovim
     gitMinimal
-    jdk21_headless
-    minecraft-server-manager
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -44,19 +42,6 @@
     ];
   };
 
-  users.users."minecraft" = {
-    isSystemUser = true;
-    group = "minecraft";
-    home = "/srv/minecraft";
-    createHome = true;
-  };
-
-  users.groups."minecraft" = { };
-
-  services.minecraft = {
-    enable = true;
-  };
-
   services.openssh = {
     enable = true;
     settings = {
@@ -67,19 +52,6 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ];
-    allowedTCPPortRanges = [
-      {
-        from = 25000;
-        to = 30000;
-      }
-    ];
-    allowedUDPPortRanges = [
-      {
-        from = 25000;
-        to = 30000;
-      }
-    ];
   };
 
   system.stateVersion = "25.05";

@@ -167,11 +167,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778423165,
-        "narHash": "sha256-x8V5J40MMMwR5iQgZKYbWw+bilD+m3jVGY6EyzaN5yk=",
+        "lastModified": 1778886782,
+        "narHash": "sha256-G44Se1EoN1j//LhLr/0e6B9KApY58T5wj9UhEBR3kAs=",
         "owner": "ymelois",
         "repo": "minecraft-server-manager",
-        "rev": "2a2b5cabcc14474b46ecedd45ebc5ff3e6d11f18",
+        "rev": "830482ae3b26f3728bc2cdf19f808ba00d7f5970",
         "type": "github"
       },
       "original": {
