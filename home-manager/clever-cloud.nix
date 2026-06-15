@@ -17,7 +17,9 @@
     };
     backup = {
       enable = true;
-      folders = [ ];
+      folders = [
+        ".claude/projects"
+      ];
     };
   };
 

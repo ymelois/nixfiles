@@ -11,6 +11,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./minecraft.nix
+    ./syncthing.nix
   ];
 
   environment.systemPackages = with pkgs; [

@@ -16,7 +16,15 @@
       device = "laptop";
     };
     gaming.enable = true;
-    backup.enable = true;
+    backup = {
+      enable = true;
+      folders = [
+        "Backups"
+        "Desktop"
+        "Pictures"
+        "Videos"
+      ];
+    };
   };
 
   home.stateVersion = "25.05";

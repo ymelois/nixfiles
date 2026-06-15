@@ -17,12 +17,7 @@ in
     enable = lib.mkEnableOption "backup";
     folders = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [
-        "Backups"
-        "Desktop"
-        "Pictures"
-        "Videos"
-      ];
+      default = [ ];
     };
   };
 

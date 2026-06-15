@@ -16,7 +16,16 @@
       device = "desktop";
     };
     gaming.enable = true;
-    backup.enable = true;
+    backup = {
+      enable = true;
+      folders = [
+        ".claude/projects"
+        "Backups"
+        "Desktop"
+        "Pictures"
+        "Videos"
+      ];
+    };
   };
 
   home.stateVersion = "25.05";
