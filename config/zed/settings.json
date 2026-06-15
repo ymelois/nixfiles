@@ -1,4 +1,22 @@
 {
+    "cli_default_open_behavior": "new_window",
+    "project_panel": {
+        "dock": "left",
+    },
+    "outline_panel": {
+        "dock": "left",
+    },
+    "collaboration_panel": {
+        "dock": "left",
+    },
+    "agent": {
+        "dock": "right",
+        "favorite_models": [],
+        "model_parameters": [],
+    },
+    "git_panel": {
+        "dock": "left",
+    },
     "disable_ai": true,
     "auto_install_extensions": {
         "html": true,
@@ -17,7 +35,7 @@
         "nu": true,
         "wit": true,
         "java": true,
-        "mcp-server-context7": true
+        "mcp-server-context7": true,
     },
     "tab_size": 4,
     "preferred_line_length": 100,
@@ -30,37 +48,33 @@
     "theme": {
         "mode": "system",
         "light": "One Light",
-        "dark": "Ayu Dark"
+        "dark": "Ayu Dark",
     },
     "terminal": {
         "font_family": "Maple Mono NL NF",
         "shell": {
-            "program": "nu"
-        }
+            "program": "nu",
+        },
     },
     "lsp": {
         "rust-analyzer": {
             "initialization_options": {
                 "check": {
-                    "command": "clippy"
-                }
-            }
-        }
+                    "command": "clippy",
+                },
+            },
+        },
     },
     "languages": {
         "YAML": { "tab_size": 2 },
         "Ruby": { "tab_size": 2 },
         "Python": {
             "language_servers": ["pyright", "ruff"],
-            "formatter": [{ "language_server": { "name": "ruff" } }]
+            "formatter": [{ "language_server": { "name": "ruff" } }],
         },
         "Nix": {
             "tab_size": 2,
-            "formatter": [{ "external": { "command": "nixfmt" } }]
+            "formatter": [{ "external": { "command": "nixfmt" } }],
         },
-        "Markdown": {
-            "soft_wrap": "preferred_line_length",
-            "preferred_line_length": 80
-        }
-    }
+    },
 }
