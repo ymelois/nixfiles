@@ -1,5 +1,6 @@
 {
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -9,13 +10,32 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./minecraft.nix
+    ./syncthing.nix
   ];
-  boot.loader.grub = {
-    # no need to set devices, disko will add all devices that have a EF02 partition to the list already
-    # devices = [ ];
-    efiSupport = true;
-    efiInstallAsRemovable = true;
+
+  environment.systemPackages = with pkgs; [
+    neovim
+    gitMinimal
+  ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 3;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
+  nix.settings.auto-optimise-store = true;
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  networking.hostName = "server";
 
   users.users."root" = {
     openssh.authorizedKeys.keys = [
@@ -23,7 +43,17 @@
     ];
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "prohibit-password";
+    };
+  };
+
+  networking.firewall = {
+    enable = true;
+  };
 
   system.stateVersion = "25.05";
 }

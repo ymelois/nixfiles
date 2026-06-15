@@ -183,12 +183,8 @@
         # nixos-rebuild --target-host root@<hostname> switch --flake ~/nixfiles#server
         "server" = mkNixosSystem [
           disko.nixosModules.disko
-          ./nixos/server
-        ];
-        "server-game" = mkNixosSystem [
-          disko.nixosModules.disko
           inputs.minecraft-server-manager.nixosModules.default
-          ./nixos/server-game
+          ./nixos/server
         ];
         "clever-cloud" = mkNixosSystem [
           ./nixos/clever-cloud
