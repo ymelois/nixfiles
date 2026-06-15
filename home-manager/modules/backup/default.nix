@@ -18,6 +18,7 @@ in
     folders = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
+        "Backups"
         "Desktop"
         "Pictures"
         "Videos"
