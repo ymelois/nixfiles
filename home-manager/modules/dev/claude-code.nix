@@ -108,6 +108,97 @@ let
     if __name__ == "__main__":
         sys.exit(main())
   '';
+
+  # PostToolUse hook on Edit/Write/MultiEdit: the same headless judge lints the
+  # prose just written to a markdown file and feeds violations back as context
+  # (non-blocking, since the write already happened). Gated to `.md` only; the
+  # tool already ran so it warns rather than blocks. Code comments are left to
+  # reinjection and the chat judge. Any error or non-md path fails open silently.
+  fileStyleLint = pkgs.writers.writePython3 "claude-file-style-lint" { flakeIgnore = [ "E501" ]; } ''
+    import json
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    CLAUDE = "${lib.getExe pkgs.claude-code}"
+    RULES_DIR = Path("${user.configDirectory}/claude/rules")
+    INSTRUCTIONS = (
+        "You are a strict style linter for prose written to a markdown file. "
+        "Given STYLE RULES and the written TEXT, find only clear, concrete "
+        "violations in the TEXT. Judge the prose only. Never flag any text inside "
+        "straight double quotes or backticks; treat all quoted or backticked text "
+        "as a mention or example, never a violation, even if it contains a banned "
+        "word or construction. Ignore code blocks, inline code, file paths, and "
+        "command-line flags. If unsure, do not flag; prefer OK. Output: if there "
+        "are no violations, output exactly OK and nothing else; otherwise output "
+        "one line per violation as the quoted offending text, then an arrow, then "
+        "the rule broken, with no preamble."
+    )
+
+
+    def extract_text(tool_name, tool_input):
+        if tool_name == "Write":
+            return tool_input.get("content", "")
+        if tool_name == "Edit":
+            return tool_input.get("new_string", "")
+        if tool_name == "MultiEdit":
+            edits = tool_input.get("edits", [])
+            return "\n".join(e.get("new_string", "") for e in edits)
+        return ""
+
+
+    def main():
+        try:
+            payload = json.load(sys.stdin)
+        except (json.JSONDecodeError, ValueError):
+            return 0
+
+        tool_input = payload.get("tool_input") or {}
+        path = tool_input.get("file_path", "")
+        if not isinstance(path, str) or not path.lower().endswith(".md"):
+            return 0
+
+        text = extract_text(payload.get("tool_name"), tool_input)
+        if not isinstance(text, str) or not text.strip():
+            return 0
+
+        rules = "\n".join(p.read_text() for p in sorted(RULES_DIR.glob("*.md")))
+        if not rules.strip():
+            return 0
+
+        prompt = f"{INSTRUCTIONS}\n\n=== STYLE RULES ===\n{rules}\n\n=== TEXT ===\n{text}\n"
+
+        try:
+            result = subprocess.run(
+                [CLAUDE, "-p", "--safe-mode", "--model", "sonnet"],
+                input=prompt,
+                capture_output=True,
+                text=True,
+                timeout=90,
+            )
+        except (subprocess.TimeoutExpired, OSError):
+            return 0
+
+        verdict = result.stdout.strip()
+        if not verdict or verdict.upper() == "OK":
+            return 0
+
+        context = (
+            f"STYLE VIOLATION in {path}: the markdown you just wrote breaks the "
+            f"writing rules. Fix these in a follow-up edit:\n{verdict}"
+        )
+        print(json.dumps({
+            "hookSpecificOutput": {
+                "hookEventName": "PostToolUse",
+                "additionalContext": context,
+            },
+        }))
+        return 0
+
+
+    if __name__ == "__main__":
+        sys.exit(main())
+  '';
 in
 {
   config = lib.mkIf cfg.enable {
@@ -136,6 +227,7 @@ in
     # Stable paths for settings.json to reference instead of hashed store paths.
     home.file.".claude/hooks/reinject-rules".source = reinjectRules;
     home.file.".claude/hooks/style-lint".source = styleLint;
+    home.file.".claude/hooks/file-style-lint".source = fileStyleLint;
 
     programs.git.ignores = lib.mkIf config.programs.git.enable [
       "**/.claude/settings.local.json"
