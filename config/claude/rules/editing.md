@@ -1,4 +1,4 @@
-# File Editing
+# File editing
 
 - Never use shell scripts or one-off programs (`sed`, `awk`, `perl`, `python`,
   heredoc + redirect, etc.) to create or modify file contents. Use the dedicated

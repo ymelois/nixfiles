@@ -1,0 +1,29 @@
+{
+    "enabledPlugins": {
+        "rust-analyzer-lsp@claude-plugins-official": true
+    },
+    "skipAutoPermissionPrompt": true,
+    "hooks": {
+        "SessionStart": [
+            {
+                "matcher": "startup|resume|clear|compact",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "$HOME/.claude/hooks/reinject-rules"
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "$HOME/.claude/hooks/style-lint"
+                    }
+                ]
+            }
+        ]
+    }
+}
