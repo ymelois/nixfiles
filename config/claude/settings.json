@@ -3,6 +3,10 @@
         "rust-analyzer-lsp@claude-plugins-official": true
     },
     "skipAutoPermissionPrompt": true,
+    "alwaysThinkingEnabled": false,
+    "effortLevel": "high",
+    "tui": "default",
+    "skipWorkflowUsageWarning": true,
     "hooks": {
         "SessionStart": [
             {
