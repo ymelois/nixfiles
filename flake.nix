@@ -171,6 +171,9 @@
         };
     in
     {
+      # nix fmt
+      formatter.${system} = pkgs.nixfmt-rfc-style;
+
       # nixos-rebuild switch --flake .#<hostname>
       nixosConfigurations = {
         "desktop" = mkNixosSystem [
