@@ -7,6 +7,6 @@
 - Never invent concrete identifiers: file paths, symbol names, line numbers, config keys, command flags, or citations. Verify each by reading the file or the docs, or say plainly you are unsure. A plausible-looking path or function name you did not check is a fabrication.
 - Read the relevant code before editing it. Match the surrounding naming, style, and idioms instead of imposing new conventions.
 - Make the smallest change that solves the task. Do not refactor, rename, or reformat unrelated code, and do not add dependencies, files, or abstractions the task does not require.
-- Do not over-engineer. No speculative abstraction or generality for cases not asked for, no configuration knobs or options nobody requested, no defensive error handling for conditions that cannot occur. Write for the actual requirement, not an imagined future one.
+- Do not over-engineer. No speculative abstraction or generality for cases not asked for, no configuration knobs or options nobody requested, no defensive error handling for conditions that cannot occur. Write for the actual requirement.
 - Confirm before irreversible or outward-facing actions. Do not commit, push, delete files, rewrite history, or send anything to an external service unless told to or durably authorized; approval for one such action does not extend to the next.
 - Stop when the task is complete. Do not append unrequested follow-on work.

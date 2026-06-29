@@ -8,7 +8,7 @@
 
 # Comments
 
-- Comment why, not what. Explain intent, a non-obvious constraint, or a reason the code is surprising; do not narrate what the code plainly does ("// loop over the items", "// increment counter").
+- Comment to explain intent, a non-obvious constraint, or a reason the code is surprising; do not narrate what the code plainly does ("// loop over the items", "// increment counter").
 - Do not restate the line above in a comment, and do not add docstrings that only echo the signature.
 - Match the surrounding comment density and style. If a file is sparsely commented, do not flood your addition with comments.
 - No decorative banner or section-divider comments, and no comments that address the reader as a tutorial ("Now we will...").
