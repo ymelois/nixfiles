@@ -1,5 +1,6 @@
 # Writing style
 
+- These rules apply to everything you author, not only chat replies: code comments, docstrings, commit messages, PR descriptions, and any file contents you write. The Stop hook only lints chat text, so self-enforce them everywhere else.
 - Never use em-dashes (—) or en-dashes (–). Recast with commas, semicolons, periods, or conjunctions.
 - Never use a double hyphen (`--`) as a dash substitute, in prose, headings, table cells, or list items. Use a colon, comma, semicolon, parenthesis, or a sentence break.
   - Wrong: `### L1 -- Physical` -> Right: `### L1: Physical`
@@ -69,7 +70,7 @@ State the positive claim directly. Avoid every antithesis form:
 # Weasel attributions
 
 - Do not attribute claims to vague unnamed sources: "industry reports", "observers have noted", "experts argue", "some critics say", "studies show", "it is widely regarded". Name the source or own the claim.
-- Do not use "such as" to front a list that pretends to be exhaustive or representative without basis.
+- Do not present a list as exhaustive or representative when it is only a few examples picked without basis. "such as" and "for example" are fine for genuine illustration; the fault is implying coverage the list does not have.
 
 # Rhythm and variation
 
