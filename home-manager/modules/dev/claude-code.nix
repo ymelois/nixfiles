@@ -75,7 +75,7 @@ let
         if not isinstance(reply, str) or not reply.strip():
             return 0
 
-        rules = "\n".join(p.read_text() for p in sorted(RULES_DIR.glob("*.md")))
+        rules = "\n".join(p.read_text() for p in sorted(RULES_DIR.glob("*.md")) if p.name != "behavior.md")
         if not rules.strip():
             return 0
 
@@ -162,7 +162,7 @@ let
         if not isinstance(text, str) or not text.strip():
             return 0
 
-        rules = "\n".join(p.read_text() for p in sorted(RULES_DIR.glob("*.md")))
+        rules = "\n".join(p.read_text() for p in sorted(RULES_DIR.glob("*.md")) if p.name != "behavior.md")
         if not rules.strip():
             return 0
 
