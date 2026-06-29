@@ -65,21 +65,6 @@ in
           '';
           type = "stdio";
         };
-        github = {
-          command = pkgs.writeShellScript "github-mcp" ''
-            export GITHUB_PERSONAL_ACCESS_TOKEN="$(cat ${secretPaths.githubPersonalAccessToken})"
-            exec ${lib.getExe pkgs.unstable.github-mcp-server} stdio
-          '';
-          type = "stdio";
-        };
-        gitlab = {
-          command = "${lib.getExe pkgs.unstable.glab}";
-          args = [
-            "mcp"
-            "serve"
-          ];
-          type = "stdio";
-        };
       };
     };
 

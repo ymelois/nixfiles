@@ -31,6 +31,8 @@ in
 
     home.packages = with pkgs; [
       tealdeer
+      gh
+      glab
     ];
 
     programs = {
