@@ -57,11 +57,11 @@
 
 let
   pname = "discord";
-  version = "1.0.137";
+  version = "1.0.145";
 
   src = fetchurl {
     url = "https://stable.dl2.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-    hash = "sha256-myt7RRrkoNLcjdhYvkJS1mmce09Q9XmpAlkxQx4NVV4=";
+    hash = "sha256-rR7qo1+xtGzGXLCwGzv6XE1nive8wfECffja0rkoHHo=";
   };
 
   disableBreakingUpdates = writers.writePython3Bin "disable-breaking-updates" {
